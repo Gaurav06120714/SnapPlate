@@ -1,0 +1,13 @@
+# dependencies
+node_modules/
+# build output
+.next/
+out/
+# datasets & large files
+SnapPlate-Dataset/
+*.zip
+# env
+.env.local
+# misc
+.DS_Store
+*.log
