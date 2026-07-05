@@ -1,0 +1,102 @@
+class,name,calories,protein_g,carbs_g,fat_g,fiber_g,serving_g
+apple_pie,Apple Pie,265,2.4,37,12.5,1.6,125
+baby_back_ribs,Baby Back Ribs,290,21,3,21,0,250
+baklava,Baklava,430,6,45,26,2.5,80
+beef_carpaccio,Beef Carpaccio,190,22,1,11,0,100
+beef_tartare,Beef Tartare,200,20,2,12,0,120
+beet_salad,Beet Salad,90,2,12,4,3,150
+beignets,Beignets,380,6,45,19,1.5,90
+bibimbap,Bibimbap,130,6,18,4,2.5,400
+bread_pudding,Bread Pudding,260,6,38,9,1,150
+breakfast_burrito,Breakfast Burrito,210,9,22,10,2,250
+bruschetta,Bruschetta,200,5,26,8,2,120
+caesar_salad,Caesar Salad,190,6,8,15,2,150
+cannoli,Cannoli,350,7,38,19,1,90
+caprese_salad,Caprese Salad,150,8,4,11,1,150
+carrot_cake,Carrot Cake,380,4,48,20,1.5,110
+ceviche,Ceviche,100,16,5,2,0.5,150
+cheesecake,Cheesecake,320,6,26,22,0.5,125
+cheese_plate,Cheese Plate,380,22,3,31,0,100
+chicken_curry,Chicken Curry,150,12,6,9,1.5,300
+chicken_quesadilla,Chicken Quesadilla,280,15,24,14,2,200
+chicken_wings,Chicken Wings,250,24,2,16,0,150
+chocolate_cake,Chocolate Cake,370,5,50,17,2,110
+chocolate_mousse,Chocolate Mousse,250,5,24,15,1.5,100
+churros,Churros,400,5,45,22,1.5,80
+clam_chowder,Clam Chowder,90,5,9,4,0.5,250
+club_sandwich,Club Sandwich,250,15,22,12,2,230
+crab_cakes,Crab Cakes,220,14,12,13,0.5,120
+creme_brulee,Creme Brulee,320,5,28,21,0,120
+croque_madame,Croque Madame,290,16,20,16,1,200
+cup_cakes,Cupcakes,340,4,52,14,0.5,80
+deviled_eggs,Deviled Eggs,200,10,2,17,0,60
+donuts,Donuts,420,5,51,22,1.5,70
+dumplings,Dumplings,200,8,25,8,1.5,150
+edamame,Edamame,120,11,10,5,5,150
+eggs_benedict,Eggs Benedict,230,12,14,15,1,200
+escargots,Escargots,90,16,2,1.5,0,100
+falafel,Falafel,330,13,32,18,5,150
+filet_mignon,Filet Mignon,270,26,0,18,0,200
+fish_and_chips,Fish and Chips,230,12,22,11,2,300
+foie_gras,Foie Gras,460,11,5,44,0,60
+french_fries,French Fries,310,3.4,41,15,4,130
+french_onion_soup,French Onion Soup,70,4,7,3,1,300
+french_toast,French Toast,230,8,26,10,1,150
+fried_calamari,Fried Calamari,175,15,8,8,0.3,150
+fried_rice,Fried Rice,170,5,24,6,1,250
+frozen_yogurt,Frozen Yogurt,130,4,22,4,0,150
+garlic_bread,Garlic Bread,330,8,42,14,2.5,80
+gnocchi,Gnocchi,170,4,30,4,2,250
+greek_salad,Greek Salad,110,3,6,9,2,200
+grilled_cheese_sandwich,Grilled Cheese Sandwich,350,13,28,21,2,120
+grilled_salmon,Grilled Salmon,210,22,0,13,0,180
+guacamole,Guacamole,160,2,9,15,7,100
+gyoza,Gyoza,210,8,22,10,1.5,150
+hamburger,Hamburger,250,14,22,12,1.5,220
+hot_and_sour_soup,Hot and Sour Soup,50,3,6,2,1,300
+hot_dog,Hot Dog,290,11,20,18,1,120
+huevos_rancheros,Huevos Rancheros,160,8,14,8,2.5,250
+hummus,Hummus,240,8,20,15,6,100
+ice_cream,Ice Cream,210,4,24,11,0.5,100
+lasagna,Lasagna,170,10,15,8,1.5,300
+lobster_bisque,Lobster Bisque,100,5,8,6,0.5,250
+lobster_roll_sandwich,Lobster Roll Sandwich,220,13,20,10,1,200
+macaroni_and_cheese,Macaroni and Cheese,210,8,24,9,1.5,220
+macarons,Macarons,400,7,60,15,2,50
+miso_soup,Miso Soup,40,3,4,1.5,1,250
+mussels,Mussels,170,24,7,4.5,0,150
+nachos,Nachos,310,9,32,17,3,200
+omelette,Omelette,155,11,1,12,0,150
+onion_rings,Onion Rings,330,4,40,17,2.5,100
+oysters,Oysters,80,9,4,2.5,0,100
+pad_thai,Pad Thai,190,9,25,6,2,300
+paella,Paella,160,9,20,5,1.5,300
+pancakes,Pancakes,230,6,28,10,1,150
+panna_cotta,Panna Cotta,290,4,24,20,0,120
+peking_duck,Peking Duck,340,19,4,28,0,150
+pho,Pho,70,6,9,1.5,0.5,400
+pizza,Pizza,265,11,33,10,2.5,200
+pork_chop,Pork Chop,230,26,0,14,0,200
+poutine,Poutine,290,8,30,16,2.5,250
+prime_rib,Prime Rib,310,24,0,24,0,250
+pulled_pork_sandwich,Pulled Pork Sandwich,250,15,26,9,1.5,220
+ramen,Ramen,110,6,14,3.5,1,400
+ravioli,Ravioli,180,8,24,6,1.5,250
+red_velvet_cake,Red Velvet Cake,370,4,50,18,1,110
+risotto,Risotto,170,4,26,5,1,250
+samosa,Samosa,260,5,30,13,3,100
+sashimi,Sashimi,130,22,0,4,0,120
+scallops,Scallops,110,20,5,1,0,150
+seaweed_salad,Seaweed Salad,70,2,8,4,2,100
+shrimp_and_grits,Shrimp and Grits,160,10,16,6,1,250
+spaghetti_bolognese,Spaghetti Bolognese,150,8,18,5,1.5,300
+spaghetti_carbonara,Spaghetti Carbonara,200,8,22,9,1.5,300
+spring_rolls,Spring Rolls,200,5,24,9,2,120
+steak,Steak,270,25,0,19,0,220
+strawberry_shortcake,Strawberry Shortcake,290,4,40,13,1.5,120
+sushi,Sushi,140,6,28,1,1,200
+tacos,Tacos,220,9,20,12,3,150
+takoyaki,Takoyaki,180,8,20,8,1,150
+tiramisu,Tiramisu,290,5,30,16,0.5,120
+tuna_tartare,Tuna Tartare,150,20,3,6,0.3,120
+waffles,Waffles,290,6,33,15,1,100

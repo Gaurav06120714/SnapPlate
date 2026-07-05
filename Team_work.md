@@ -16,12 +16,12 @@
 
 | # | Task | Description | Status |
 |---|------|-------------|--------|
-| 1 | Project setup & repo | Create repo, folder structure, requirements, README | ☐ |
-| 2 | Dataset collection | Download & organize Food-101 (101 classes, 101k images) | ☐ |
-| 3 | Data preprocessing | Resize to 224×224, normalise, train/val/test split, augmentation | ☐ |
-| 4 | Model architecture | EfficientNetB0 backbone + classifier head (transfer learning) | ☐ |
-| 5 | Model training | Two-phase training (freeze head → fine-tune), save model | ☐ |
-| 6 | Documentation | Maintain README, training notes, results write-up | ☐ |
+| 1 | Project setup & repo | Create repo, folder structure, requirements, README | ☑ |
+| 2 | Dataset collection | Download & organize Food-101 (101 classes, 101k images) | ☑ |
+| 3 | Data preprocessing | Resize to 300×300, normalise, train/val/test split, augmentation | ☑ |
+| 4 | Model architecture | EfficientNetB3 backbone + classifier head (transfer learning) | ☑ |
+| 5 | Model training | Two-phase training → **84.13% top-1 / 96.80% top-5** | ☑ |
+| 6 | Documentation | Maintain README, training notes, results write-up | ☑ |
 
 ---
 
@@ -29,12 +29,12 @@
 
 | # | Task | Description | Status |
 |---|------|-------------|--------|
-| 1 | Base papers research | Collect & summarise base papers (Nutrition5k, Food-101, DietAI24, CalorieLLaVA) | ☐ |
-| 2 | Nutrition table | Build per-100g nutrition table (calories, protein, carbs, fat, fibre) for all classes | ☐ |
-| 3 | Portion logic | Serving-size selector + portion → nutrition maths | ☐ |
-| 4 | Model evaluation | Accuracy, confusion matrix, classification report, training curves | ☐ |
-| 5 | Demo app | Streamlit app: upload photo → food + nutrition output | ☐ |
-| 6 | Testing | Test predictions on real food photos, log bugs, edge cases | ☐ |
+| 1 | Base papers research | Collect & summarise base papers (Nutrition5k, Food-101, DietAI24, CalorieLLaVA) | ☑ |
+| 2 | Nutrition table | Build per-100g nutrition table (calories, protein, carbs, fat, fibre) for all classes | ☑ |
+| 3 | Portion logic | Serving-size selector + portion → nutrition maths | ☑ |
+| 4 | Model evaluation | Accuracy done; confusion matrix + classification report pending | ◐ |
+| 5 | Demo app | Streamlit app: upload photo → food + nutrition output | ☑ |
+| 6 | Testing | Test predictions on real food photos, log bugs, edge cases | ◐ |
 
 ---
 
@@ -42,11 +42,15 @@
 
 | # | Task | Description | Status |
 |---|------|-------------|--------|
-| 1 | Dataset finalisation | Decide Food-101 vs Indian-food dataset | ☐ |
-| 2 | Integration | Connect model → nutrition table → demo app | ☐ |
+| 1 | Dataset finalisation | Decide Food-101 vs Indian-food dataset | ☑ |
+| 2 | Integration | Connect model → nutrition table → demo app | ☑ |
 | 3 | Final report & PPT | Combine results, prepare submission & presentation | ☐ |
 | 4 | Review | Cross-check each other's work before submission | ☐ |
 
 ---
 
-_Legend: ☐ = not started · ☑ = done. Update the Status column as tasks progress._
+_Legend: ☐ = not started · ◐ = in progress · ☑ = done. Update the Status column as tasks progress._
+
+## Progress snapshot (2026-07-05)
+
+Model trained and verified: **EfficientNetB3, 84.13% top-1 / 96.80% top-5** on the Food-101 test set. Nutrition table (101 classes) and Streamlit demo app are done. Remaining: confusion matrix / classification report, real-photo testing, and the final report + PPT.

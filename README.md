@@ -11,6 +11,7 @@ An **AI-Based Dietary Assessment** system. SnapPlate takes a photo of a meal and
 ## Table of Contents
 
 - [What It Does](#what-it-does)
+- [Results](#results)
 - [Honest Scope: What ML Can and Can't Do Here](#honest-scope-what-ml-can-and-cant-do-here)
 - [How It Works (Pipeline)](#how-it-works-pipeline)
 - [Model](#model)
@@ -34,6 +35,21 @@ An **AI-Based Dietary Assessment** system. SnapPlate takes a photo of a meal and
 5. SnapPlate reports the estimated **calories, protein, carbohydrate, fat, and fibre** for that meal.
 
 The output is real, defensible nutrition numbers produced by a model we build and train — not a black-box API call.
+
+---
+
+## Results
+
+The model was trained on **Food-101** (101 food classes, 101,000 images) using two-phase transfer learning on an Apple M2 Pro GPU (Metal). Two runs were done:
+
+| Run | Backbone | Input | Test Top-1 | Test Top-5 |
+|-----|----------|-------|-----------|-----------|
+| #1 | EfficientNetB0 | 224px | 74.65% | — |
+| **#2 (final)** | **EfficientNetB3** | **300px** | **84.13%** | **96.80%** |
+
+**Top-5 accuracy of 96.8%** means the correct food is among the model's five best guesses ~97% of the time — which is what powers the "not this? other likely matches" suggestions in the demo. Misclassifications happen between genuinely similar foods (e.g. steak vs. filet mignon, donuts vs. pancakes), and the model reports *low confidence* exactly when it is wrong, indicating it is well-calibrated.
+
+Evaluated on the held-out test split of 25,250 images the model never saw during training.
 
 ---
 
@@ -71,12 +87,13 @@ photo ──▶ preprocess (resize 224×224, normalise)
 
 ## Model
 
-- **Architecture:** EfficientNetB0 backbone (pretrained on ImageNet) + a new classification head.
-- **Why transfer learning:** training a good image model from scratch needs huge data and compute; fine-tuning a pretrained backbone reaches high accuracy on a laptop/Colab GPU in a short time. It also connects directly to the ANN fundamentals (layers, activations, backprop) from the course notes, applied to a real convolutional network.
+- **Architecture:** EfficientNet**B3** backbone (pretrained on ImageNet) + a new classification head. (An EfficientNetB0 baseline was also trained.)
+- **Why transfer learning:** training a good image model from scratch needs huge data and compute; fine-tuning a pretrained backbone reaches high accuracy on a laptop GPU in a short time. It also connects directly to the ANN fundamentals (layers, activations, backprop) from the course notes, applied to a real convolutional network.
 - **Two-phase training:**
   1. Freeze the backbone, train only the new head.
-  2. Unfreeze the top blocks and fine-tune with a very low learning rate.
-- **Output:** a softmax over the food classes; we take the top prediction (and top-k for the UI).
+  2. Unfreeze the top ~50% of the backbone and fine-tune with a very low learning rate.
+- **Training tricks:** label smoothing (0.1), on-the-fly augmentation, `ReduceLROnPlateau`, and `EarlyStopping` on validation accuracy.
+- **Output:** a softmax over the 101 food classes; we take the top prediction (and top-5 for the "other likely matches" UI).
 
 ---
 
@@ -107,55 +124,65 @@ Values are drawn from public food-composition references (e.g. USDA FoodData Cen
 |-------|--------|-------|
 | Language | Python 3.10+ | Standard ML tooling. |
 | Framework | TensorFlow / Keras | EfficientNet, training, saving. |
-| Model | EfficientNetB0 (transfer learning) | Pretrained on ImageNet. |
-| Data | Food-101 | 101 classes; `tensorflow-datasets` can fetch it. |
+| Model | EfficientNetB3 (transfer learning) | Pretrained on ImageNet. |
+| Data | Food-101 | 101 classes, 101k images. |
 | Numerics | NumPy, pandas | Nutrition table + preprocessing. |
 | Eval | scikit-learn, matplotlib | Confusion matrix, training curves. |
 | Demo | Streamlit | Upload a photo → food + nutrition. |
-| Training | Google Colab (free GPU) | No local GPU required. |
+| Training | Apple M2 Pro (Metal GPU) | Trained locally via `tensorflow-metal`. |
 
 ---
 
-## Planned Project Structure
+## Project Structure
 
 ```
-snapplate-ml/
-  data/
-    nutrition_table.csv     # per-100g nutrition + serving size for each class
-  src/
-    config.py               # paths, image size, hyperparameters
-    data.py                 # dataset loading + augmentation
-    model.py                # EfficientNetB0 transfer-learning model
-    train.py                # two-phase training; saves model + class index
-    nutrition.py            # class → nutrition lookup + portion maths
-    predict.py              # load model, classify an image, compute nutrition
-  app/
-    streamlit_app.py        # demo: upload image → prediction + nutrition
-  models/                   # saved model + class_index.json (after training)
-  requirements.txt
-  README.md
+SnapPlate/
+  training/
+    config.py             # paths, image size, hyperparameters
+    data.py               # Food-101 pipeline + augmentation
+    model.py              # EfficientNet transfer-learning model
+    train.py              # two-phase training; saves model + class index
+    evaluate.py           # test-set evaluation (top-1 / top-5)
+    test_samples.py       # sanity test on random held-out images
+    predict.py            # load model, classify an image, compute nutrition
+    app.py                # Streamlit demo: upload image → prediction + nutrition
+    verify_gpu.py         # confirm the Metal GPU is available
+    nutrition_table.csv   # per-100g nutrition + serving size for 101 classes
+    outputs/              # class_index.json, eval/history JSON (model .keras is git-ignored)
+    README.md
+  Datapreprocessing.py    # data-preprocessing helper
+  README.md               # this file
+  Team_work.md            # task split (Gaurav / Veeresham)
 ```
 
-> This structure is the plan for the ML implementation. It is documented here; the code lives in the `snapplate-ml` project.
+> The trained model files (`*.keras`) and the Food-101 dataset are **not** in the repo — they exceed GitHub's 100 MB limit and are kept locally. Run `training/train.py` to reproduce the model.
 
 ---
 
 ## Setup & Training
 
-**Prerequisites:** Python 3.10+ and pip. A GPU (or Google Colab) is strongly recommended for training.
+**Prerequisites:** Python 3.11 and pip. A GPU is strongly recommended for training (this project trained on an Apple M2 Pro via `tensorflow-metal`).
 
 ```bash
-# 1. Install dependencies
-pip install -r requirements.txt
+# 1. Create a virtual environment and install dependencies
+python3.11 -m venv .venv
+source .venv/bin/activate
+pip install "tensorflow>=2.16,<2.17" tensorflow-metal numpy pandas pillow scikit-learn matplotlib streamlit
 
-# 2. Train (downloads Food-101 on first run; use Colab for a free GPU)
-python src/train.py
+# 2. (Optional) confirm the GPU is visible
+python training/verify_gpu.py
 
-# 3. Run the demo app on the trained model
-streamlit run app/streamlit_app.py
+# 3. Train (expects Food-101 at SnapPlate-Dataset/food-101/)
+cd training && python train.py
+
+# 4. Evaluate the trained model on the test set
+python evaluate.py
+
+# 5. Run the demo app
+python -m streamlit run app.py
 ```
 
-Training saves the model and the class index into `models/`, which the demo app and `predict.py` load for inference.
+Training saves the model and class index into `training/outputs/`, which the demo app and `predict.py` load for inference. Use `python -m streamlit` (not bare `streamlit`) so it runs inside the venv that has TensorFlow.
 
 ---
 

@@ -1,0 +1,6 @@
+{
+  "backbone": "EfficientNetB3",
+  "img_size": 300,
+  "test_accuracy": 0.8413465619087219,
+  "test_top5_accuracy": 0.9679604172706604
+}
